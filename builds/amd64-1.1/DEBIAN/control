@@ -1,0 +1,6 @@
+Package: update-jenkins
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: irkobl <ilkor8183@gmail.com>
+Description: Утилита для обновления jenkins

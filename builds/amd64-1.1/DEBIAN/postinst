@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+path="../usr/lib/systemd/system/"
+srv=("update-jenkins.service" "update-jenkins.timer")
+
+for fl in ${srv[@]}; do
+
+    if [ -f ${path}${fl} ]; then
+        systemctl enable ${fl}
+        if [ ${fl} == "update-jenkins.timer" ]; then
+            systemctl start ${fl}            
+        fi
+    fi
+
+done

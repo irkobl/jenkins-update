@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer update Jenkins
+Requires=update-jenkins.service
+
+[Timer]
+Unit=update-jenkins.service
+OnCalendar=Sat *-*-1..8 02:00
+
+[Install]
+WantedBy=timers.target

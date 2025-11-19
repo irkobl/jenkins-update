@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+status=$(systemctl is-active update-jenkins.timer)
+srv=("update-jenkins.service" "update-jenkins.timer")
+path="../usr/lib/systemd/system/"
+
+if [ $status=="active" ]; then
+
+    for fl in ${srv[@]}; do
+        systemctl stop $fl
+        systemctl disable $fl
+    done
+
+fi
+
+for fl in ${srv[@]}; do
+    
+    if [ -f ${path}${fl} ]; then
+        rm -f ${path}${fl}
+    fi
+
+done
+

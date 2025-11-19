@@ -1,0 +1,9 @@
+services:
+  jenkins-update:
+    environment:
+      GOMEMLIMIT: "128MiB"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}:/home/admin

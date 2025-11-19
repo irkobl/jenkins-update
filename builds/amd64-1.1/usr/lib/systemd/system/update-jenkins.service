@@ -1,0 +1,12 @@
+[Unit]
+Description=Update jenkins
+After=network.target
+
+[Service]
+User=jenkins
+Group=jenkins
+Type=oneshot
+ExecStart=/usr/bin/update-jenkins -u jenkins -p 11fb99ab6315547240b05c118796b68b09 --all-update
+
+[Install]
+WantedBy=multi-user.target

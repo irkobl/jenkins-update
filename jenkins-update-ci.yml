@@ -1,0 +1,22 @@
+stages:
+  - build
+
+build_job:
+  stage: build
+  image: golang:1.23
+  script:
+    - git clean -f -d
+    - |
+      apt-get update -qq && apt-get -y install apt-transport-https ca-certificates lsb-release \
+      sudo make gcc zip unzip git curl wget vim build-essential default-jdk default-jre && \
+      rm -rf /var/lib/apt/lists/* rm -rf /var/cache/apt/*
+    - GO_ENABLED=0 go install -ldflags "-s -w -extldflags '-static'" github.com/go-delve/delve/cmd/dlv@latest
+    - useradd -ms /bin/bash gitlab-runner && usermod -aG sudo gitlab-runner && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && echo 'root:root' | chpasswd
+    - go mod tidy
+    - make build build_name="update-jenkins" version="amd64-1.2"
+  artifacts:
+    name: "update-jenkins"
+    paths:
+      - builds/*.deb
+    public: true
+    expire_in: 1 week
