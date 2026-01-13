@@ -48,8 +48,8 @@ func (p Param) UpdatePlugin() {
 }
 
 func (p Param) UpdateAll() {
-	p.UpdatePlugin()
 	p.UpdateJenkins()
+	p.UpdatePlugin()
 }
 
 func (p Param) GetHttpConnection() string {

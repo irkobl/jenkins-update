@@ -40,9 +40,9 @@ var jenkinsCmd = &cobra.Command{
 			version := exec.Command("/bin/sh", "-c", cmdGetVer)
 			ver, err := version.Output()
 			if err != nil {
-				log.Printf("Ошибка %v: %v", StrCm, err)
+				log.Printf("Jenkins is not available %v: %v", StrCm, err)
 			} else {
-				log.Printf("%v", StrCm)
+				log.Printf("%v: %v", StrCm, string(ver))
 				JenkinsVersion = string(ver)
 				break
 			}
@@ -50,7 +50,7 @@ var jenkinsCmd = &cobra.Command{
 
 		jsonDefault, err := os.Open(str.pathJsn)
 		if err != nil {
-			log.Printf("Ошибка открытия файла: %v", err)
+			log.Printf("Error opening file: %v", err)
 		} else {
 			bte, _ := io.ReadAll(jsonDefault)
 			json.Unmarshal(bte, &UpBuild)
@@ -61,10 +61,10 @@ var jenkinsCmd = &cobra.Command{
 
 		if newRel {
 
-			log.Printf("Обновление jenkins: %s -> %s ...", strings.TrimSpace(JenkinsVersion), UpBuild.Core.Version)
+			log.Printf("Update jenkins: %s -> %s ...", strings.TrimSpace(JenkinsVersion), UpBuild.Core.Version)
 
 			if _, err := os.Stat(str.pathWar); errors.Is(err, os.ErrNotExist) {
-				log.Printf("Отсутствует: %v", str.pathWar)
+				log.Printf("Absent: %v", str.pathWar)
 			} else {
 				target := fmt.Sprintf("%v.old_%v", str.pathWar, time.Now().Format("02012006"))
 				mv := exec.Command("sudo", "mv", str.pathWar, target)
