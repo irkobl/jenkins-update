@@ -7,7 +7,7 @@ $ docker compose run --rm jenkins-update bash
 
 Build binary file
 -----------------
-$ make build build_name="update-jenkins" version="amd64-x.x"
+$ make build build_name="update-jenkins" arch="amd64" version="x.x"
 
 Example use utils
 -----------------

@@ -66,7 +66,7 @@ func (p *Param) UploadJar() error {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		if err := cmd.Run(); err != nil {
-			fmt.Errorf("ошибка при загрузке jenkins-cli.jar: %s", err)
+			fmt.Errorf("Error uploadind jenkins-cli.jar: %s", err)
 			os.Exit(1)
 		} else {
 			p.path = "./jenkins-cli.jar"
@@ -95,7 +95,7 @@ func dependency(d UpDependency) { // TODO: realisation with gorutine + context, 
 
 	_, err := exec.LookPath("java")
 	if err != nil {
-		fmt.Errorf("Не найден 'java' исполняемый файл: %v", err)
+		fmt.Errorf("Not found 'java': %v", err)
 	}
 	cmdJava := "java --version | head -n 1"
 	java := exec.Command("/bin/sh", "-c", cmdJava)
@@ -130,6 +130,7 @@ func Execute() {
 }
 
 func init() {
+
 	rootCmd.PersistentFlags().BoolP("help", "h", false, "update [command] --help")
 	rootCmd.PersistentFlags().BoolVarP(&str.all, "all-update", "", false, "update --all-update обновить полностью")
 	rootCmd.PersistentFlags().BoolVarP(&str.jenkins, "jenkins", "", false, "update --jenkins обновить версию jenkins")

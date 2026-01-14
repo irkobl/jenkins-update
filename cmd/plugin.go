@@ -18,7 +18,7 @@ var pluginCmd = &cobra.Command{
 		list := exec.Command("/bin/sh", "-c", cmdStr)
 		listPlugins, err := list.Output()
 		if err != nil {
-			fmt.Println("Ошибка при выполнении команды:", err)
+			fmt.Println("Error command::", err)
 		} else {
 			strCm := `java -jar ./jenkins-cli.jar -s http://jenkins:8080 -auth ***:*** | grep ')$' | awk '{print $1}' | tr '\n' ' '`
 			log.Println("Start:", strCm)
@@ -29,9 +29,9 @@ var pluginCmd = &cobra.Command{
 		cmdUpdate.Stdout = os.Stdout
 		cmdUpdate.Stderr = os.Stderr
 		if err = cmdUpdate.Run(); err != nil {
-			log.Println("Ошибка при выполнении команды:", err)
+			log.Println("Error command::", err)
 			if strings.TrimSpace(string(listPlugins)) == "" {
-				log.Println("Отсутствуют плагины для обновления")
+				log.Println("No plugins for updates.")
 			}
 		} else {
 			strCm := `java -jar ./jenkins-cli.jar -s http://jenkins:8080 -auth ***:*** install-plugin ` + strings.TrimSpace(string(listPlugins)) + ` -restart`

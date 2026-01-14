@@ -1,6 +1,7 @@
 Package: update-jenkins
+Version: 1.1
 Section: utils
 Priority: optional
 Architecture: amd64
 Maintainer: irkobl <ilkor8183@gmail.com>
-Description: Утилита для обновления jenkins
+Description: Обновление Jenkins

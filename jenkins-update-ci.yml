@@ -13,7 +13,7 @@ build_job:
     - GO_ENABLED=0 go install -ldflags "-s -w -extldflags '-static'" github.com/go-delve/delve/cmd/dlv@latest
     - useradd -ms /bin/bash gitlab-runner && usermod -aG sudo gitlab-runner && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && echo 'root:root' | chpasswd
     - go mod tidy
-    - make build build_name="update-jenkins" version="amd64-1.2"
+    - make build build_name="update-jenkins" arch="amd64" version="1.2"
   artifacts:
     name: "update-jenkins"
     paths:
