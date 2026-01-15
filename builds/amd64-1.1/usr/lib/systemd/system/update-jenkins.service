@@ -6,7 +6,7 @@ After=network.target
 User=jenkins
 Group=jenkins
 Type=oneshot
-ExecStart=/usr/bin/update-jenkins -u jenkins -p 11fb99ab6315547240b05c118796b68b09 --all-update
+ExecStart=/usr/bin/update-jenkins -u your-user -p your-token --all-update
 
 [Install]
 WantedBy=multi-user.target
